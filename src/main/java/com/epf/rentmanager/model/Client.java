@@ -1,0 +1,68 @@
+package com.epf.rentmanager.model;
+
+import java.time.LocalDate;
+
+public class Client {
+    private long id;
+    private String nom, prenom, email;
+    private LocalDate naissance;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public LocalDate getNaissance() {
+        return naissance;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNaissance(LocalDate naissance) {
+        this.naissance = naissance;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public Client(long id, String nom, String prenom, String email, LocalDate naissance){
+        this.setId(id);
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setEmail(email);
+        this.setNaissance(naissance);
+    }
+
+    public Client(){}
+    @Override
+    public String toString() {
+        return "Client : " +
+                "id = " + id +
+                ", nom = '" + nom + '\'' +
+                ", prenom = '" + prenom + '\'' +
+                ", email = '" + email + '\'' +
+                ", naissance = " + naissance;
+    }
+}
