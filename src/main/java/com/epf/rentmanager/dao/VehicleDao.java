@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.Exception.DaoException;
 
@@ -32,7 +35,7 @@ public class VehicleDao {
 
 			PreparedStatement ps = connection.prepareStatement(CREATE_VEHICLE_QUERY);
 
-			ps.setString(1, vehicule.getConstrueur());
+			ps.setString(1, vehicule.getConstructeur());
 			ps.setShort(2, vehicule.getNb_places());
 
 			ps.execute();
@@ -46,17 +49,73 @@ public class VehicleDao {
 	}
 
 	public long delete(Vehicule vehicule) throws DaoException {
-		return 0;
+
+		try {
+			Connection connection = ConnectionManager.getConnection();
+
+			PreparedStatement ps = connection.prepareStatement(DELETE_VEHICLE_QUERY);
+
+			ps.setLong(1, vehicule.getId());
+
+			ps.execute();
+			ps.close();
+			connection.close();
+
+			return vehicule.getId();
+
+		}catch (SQLException e) {
+			throw new DaoException();
+		}
 	}
 
 	public Vehicule findById(long id) throws DaoException {
-		return new Vehicule();
+		try {
+			Connection connection = ConnectionManager.getConnection();
+
+			PreparedStatement ps = connection.prepareStatement(FIND_VEHICLE_QUERY);
+
+			ps.setLong(1, id);
+
+			ps.execute();
+
+			ResultSet resultSet = ps.getGeneratedKeys();
+
+			resultSet.close();
+			ps.close();
+			connection.close();
+
+
+			return new Vehicule(id,resultSet.getString(2),resultSet.getShort(3));
+
+		} catch (SQLException e){
+			throw new DaoException();
+		}
+
 	}
 
 	public List<Vehicule> findAll() throws DaoException {
-		return new ArrayList<Vehicule>();
-		
-	}
-	
+		try {
+			Connection connection = ConnectionManager.getConnection();
 
+			PreparedStatement ps = connection.prepareStatement(FIND_VEHICLES_QUERY);
+
+			ps.execute();
+			ResultSet resultSet = ps.getGeneratedKeys();
+
+			ArrayList<Vehicule> vehiculeList = new ArrayList<Vehicule>();
+
+			while (resultSet.next()) {
+				vehiculeList.add(new Vehicule(resultSet.getLong(1), resultSet.getString(2), resultSet.getShort(3)));
+			}
+
+			resultSet.close();
+			ps.close();
+			connection.close();
+
+			return vehiculeList;
+
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	}
 }
