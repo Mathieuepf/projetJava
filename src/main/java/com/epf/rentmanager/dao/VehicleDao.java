@@ -38,12 +38,12 @@ public class VehicleDao {
 			ps.setString(1, vehicule.getConstructeur());
 			ps.setShort(2, vehicule.getNb_places());
 
-			ResultSet results = ps.getResultSet();
+			ps.execute();
+			ResultSet results = ps.getGeneratedKeys();
 			results.next();
 			long createId = results.getLong(1);
 
 			results.close();
-			ps.execute();
 			ps.close();
 			connection.close();
 

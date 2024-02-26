@@ -45,7 +45,7 @@ public class ClientDao {
 
 			ps.execute();
 
-			ResultSet results = ps.getResultSet();
+			ResultSet results = ps.getGeneratedKeys();
 			results.next();
 			long createId = results.getLong(1);
 

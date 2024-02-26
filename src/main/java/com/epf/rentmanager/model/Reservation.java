@@ -56,12 +56,19 @@ public class Reservation {
         this.setFin(fin);
     }
 
-    public Reservation(){}
+    public Reservation (long client_id, long vehicule_id, LocalDate debut, LocalDate fin) {
+        this.setClient_id(client_id);
+        this.setVehicule_id(vehicule_id);
+        this.setDebut(debut);
+        this.setFin(fin);
+    }
 
     @Override
     public String toString() {
         return "Reservation = " +
                 "id=" + id +
+                ", client id=" + client_id +
+                ", vehicule id =" + vehicule_id +
                 ", debut=" + debut +
                 ", fin=" + fin;
     }

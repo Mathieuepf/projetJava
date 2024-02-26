@@ -4,7 +4,6 @@ import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.Exception.CliException;
-import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.utils.IOUtils;
 
 import java.time.LocalDate;

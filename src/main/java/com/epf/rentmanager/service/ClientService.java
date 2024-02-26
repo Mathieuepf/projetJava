@@ -32,9 +32,9 @@ public class ClientService {
 
 	public long create(Client client) throws ServiceException {
 		try {
-			if((!(client.getNom() == null)) && !client.getNom().isEmpty())
+			if((!(client.getNom() == null)) && !client.getNom().isEmpty()) {
 				return this.getClientDao().create(client);
-			else throw new ServiceException();
+			}else throw new ServiceException();
 		}catch (Exception e){
 			throw new ServiceException();
 		}

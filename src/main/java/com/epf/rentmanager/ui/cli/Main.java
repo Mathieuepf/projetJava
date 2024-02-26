@@ -9,11 +9,14 @@ public class Main {
     public static void main(String[] args) {
         ClientCli clientCli = ClientCli.getInstance();
         VehicleCli vehicleCli = VehicleCli.getInstance();
+        ReservationCli reservationCli = ReservationCli.getInstance();
         try {
-            //long n = clientCli.create();
-            //clientCli.findAll();
-            long nv = vehicleCli.create();
-            vehicleCli.findAll();
+            //long n = clientCli.create(); // Fonctionnel
+            //clientCli.findAll(); // Fonctionnel
+            // long nv = vehicleCli.create(); // Fonctionnel
+            // vehicleCli.findAll(); // Fonctionnel
+            // reservationCli.create();
+            reservationCli.findall();
         } catch (CliException e) {
             throw new RuntimeException(e);
         }

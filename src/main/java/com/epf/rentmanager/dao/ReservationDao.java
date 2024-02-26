@@ -36,7 +36,7 @@ public class ReservationDao {
 		try {
 			Connection connection = ConnectionManager.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(CREATE_RESERVATION_QUERY);
+			PreparedStatement ps = connection.prepareStatement(CREATE_RESERVATION_QUERY, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setLong(1, reservation.getClient_id());
 			ps.setLong(2, reservation.getVehicule_id());
@@ -44,10 +44,13 @@ public class ReservationDao {
 			ps.setDate(4, Date.valueOf(reservation.getFin()));
 
 			ps.execute();
+			ResultSet results = ps.getGeneratedKeys();
+			results.next();
+			long id = results.getLong(1);
 			ps.close();
 			connection.close();
 
-			return reservation.getId();
+			return id;
 		}catch (SQLException e) {
 			throw new DaoException();
 		}
@@ -85,7 +88,7 @@ public class ReservationDao {
 			ps.execute();
 			ResultSet resultSet = ps.getResultSet();
 
-			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+			List<Reservation> reservationList = new ArrayList<Reservation>();
 
 			while (resultSet.next()) {
 				reservationList.add(new Reservation(resultSet.getLong(1), clientId, resultSet.getLong(2), resultSet.getDate(3).toLocalDate(), resultSet.getDate(4).toLocalDate()));
@@ -114,7 +117,7 @@ public class ReservationDao {
 			ps.execute();
 			ResultSet resultSet = ps.getResultSet();
 
-			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+			List<Reservation> reservationList = new ArrayList<Reservation>();
 
 			while (resultSet.next()) {
 				reservationList.add(new Reservation(resultSet.getLong(1), resultSet.getLong(2), vehicleId, resultSet.getDate(3).toLocalDate(), resultSet.getDate(4).toLocalDate()));
@@ -141,7 +144,7 @@ public class ReservationDao {
 			ps.execute();
 			ResultSet resultSet = ps.getResultSet();
 
-			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+			List<Reservation> reservationList = new ArrayList<Reservation>();
 
 			while (resultSet.next()) {
 				reservationList.add(new Reservation(resultSet.getLong(1), resultSet.getLong(2), resultSet.getLong(3), resultSet.getDate(4).toLocalDate(), resultSet.getDate(5).toLocalDate()));
