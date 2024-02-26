@@ -2,8 +2,12 @@ package com.epf.rentmanager.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import com.epf.rentmanager.Exception.DaoException;
+import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.dao.ClientDao;
+import com.epf.rentmanager.model.Client;
 
 public class ClientService {
 
@@ -21,21 +25,43 @@ public class ClientService {
 		
 		return instance;
 	}
-	
-	
+
+	public ClientDao getClientDao() {
+		return clientDao;
+	}
+
 	public long create(Client client) throws ServiceException {
-		// TODO: créer un client
-		return 0;
+		try {
+			if((!(client.getNom() == null)) && !client.getNom().isEmpty())
+				return this.getClientDao().create(client);
+			else throw new ServiceException();
+		}catch (Exception e){
+			throw new ServiceException();
+		}
+	}
+
+	public long delete(Client client) throws ServiceException {
+		try {
+			return this.getClientDao().delete(client);
+		}catch (Exception e){
+			throw new ServiceException();
+		}
 	}
 
 	public Client findById(long id) throws ServiceException {
-		// TODO: récupérer un client par son id
-		return new Client();
+		try {
+			return this.getClientDao().findById(id);
+		}catch (DaoException e){
+			throw new ServiceException();
+		}
 	}
 
 	public List<Client> findAll() throws ServiceException {
-		// TODO: récupérer tous les clients
-		return new ArrayList<Client>();
+		try{
+			return this.getClientDao().findAll();
+		}catch (DaoException e){
+			throw new ServiceException();
+		}
 	}
 	
 }

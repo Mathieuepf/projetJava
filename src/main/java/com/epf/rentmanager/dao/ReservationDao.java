@@ -83,7 +83,7 @@ public class ReservationDao {
 			ps.setLong(1, clientId);
 
 			ps.execute();
-			ResultSet resultSet = ps.getGeneratedKeys();
+			ResultSet resultSet = ps.getResultSet();
 
 			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 
@@ -112,7 +112,7 @@ public class ReservationDao {
 			ps.setLong(1, vehicleId);
 
 			ps.execute();
-			ResultSet resultSet = ps.getGeneratedKeys();
+			ResultSet resultSet = ps.getResultSet();
 
 			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 
@@ -139,7 +139,7 @@ public class ReservationDao {
 			PreparedStatement ps = connection.prepareStatement(FIND_RESERVATIONS_QUERY);
 
 			ps.execute();
-			ResultSet resultSet = ps.getGeneratedKeys();
+			ResultSet resultSet = ps.getResultSet();
 
 			ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
 

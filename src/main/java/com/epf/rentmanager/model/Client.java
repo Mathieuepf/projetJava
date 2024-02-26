@@ -54,6 +54,12 @@ public class Client {
         this.setEmail(email);
         this.setNaissance(naissance);
     }
+    public Client(String nom, String prenom, String email, LocalDate naissance) {
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setEmail(email);
+        this.setNaissance(naissance);
+    }
 
     public Client(){}
     @Override

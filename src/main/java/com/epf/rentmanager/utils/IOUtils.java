@@ -74,6 +74,28 @@ public class IOUtils {
 		
 		return output;
 	}
+
+	public static short readShort(String message) {
+		print(message);
+
+		String input = null;
+		short output = 0;
+		boolean error = false;
+
+		do {
+			input = readString();
+			error = false;
+
+			try {
+				output = Short.parseShort(input);
+			} catch (NumberFormatException e) {
+				error = true;
+				print("Veuillez saisir un nombre");
+			}
+		} while (error);
+
+		return output;
+	}
 	
 	/**
 	 * Lit une date sur l'entrée standard

@@ -51,11 +51,16 @@ public class Vehicule {
         this.setNb_places(nb_places);
     }
 
+    public Vehicule(String constructeur, short nb_places){
+        this.setConstrueur(constructeur);
+        this.setNb_places(nb_places);
+    }
+
     @Override
     public String toString() {
         return "Vehicule = " +
                 "id=" + id +
-                ", construeur='" + construeur + '\'' +
+                ", constructeur='" + constructeur + '\'' +
                 ", modele='" + modele + '\'' +
                 ", nb_places='" + nb_places + '\'';
     }
