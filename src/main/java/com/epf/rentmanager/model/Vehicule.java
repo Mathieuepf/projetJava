@@ -51,6 +51,12 @@ public class Vehicule {
         this.setNb_places(nb_places);
     }
 
+    public Vehicule(String constructeur, String modele, short nb_places){
+        this.setConstrueur(constructeur);
+        this.setModele(modele);
+        this.setNb_places(nb_places);
+    }
+
     public Vehicule(String constructeur, short nb_places){
         this.setConstrueur(constructeur);
         this.setNb_places(nb_places);

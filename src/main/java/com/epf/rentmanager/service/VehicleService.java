@@ -56,9 +56,16 @@ public class VehicleService {
 	public List<Vehicule> findAll() throws ServiceException {
 		try{
 			return this.getVehicleDao().findAll();
-		}catch (Exception e){
+		}catch (DaoException e){
 			throw new ServiceException();
 		}
 	}
-	
+
+	public int count() throws ServiceException {
+		try {
+			return this.getVehicleDao().count();
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+	}
 }
