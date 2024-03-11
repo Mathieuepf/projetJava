@@ -61,6 +61,12 @@ public class Client {
         this.setNaissance(naissance);
     }
 
+    public Client(String nom, String prenom, String email) {
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setEmail(email);
+    }
+
     public Client(){}
     @Override
     public String toString() {

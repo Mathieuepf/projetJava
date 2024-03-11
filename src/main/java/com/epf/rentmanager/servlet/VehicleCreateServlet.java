@@ -5,15 +5,15 @@ import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/cars/create")
-public class VehicleCreateServlet extends HomeServlet {
+public class VehicleCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Autowired
     VehicleService vehicleService;
@@ -23,12 +23,6 @@ public class VehicleCreateServlet extends HomeServlet {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
-    /*public VehicleService getVehicleService() {
-        if(vehicleService == null){
-            this.vehicleService = VehicleService.getInstance();
-        }
-        return vehicleService;
-    }*/
 
     public VehicleService getVehicleService() {
         return vehicleService;

@@ -17,18 +17,12 @@ import java.util.List;
 
 public class VehicleCli {
     private VehicleService vehicleService;
-    //public static VehicleCli instance;
 
     private VehicleCli() {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
         this.vehicleService = context.getBean(VehicleService.class);
     }
 
-    /*public static VehicleCli getInstance() {
-        if(instance == null)
-            instance = new VehicleCli();
-        return instance;
-    }*/
 
     public VehicleService getVehicleService() {
         return vehicleService;

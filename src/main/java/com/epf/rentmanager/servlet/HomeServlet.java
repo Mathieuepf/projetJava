@@ -22,26 +22,23 @@ public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	VehicleService vehicleService;
-	/*public VehicleService getVehicleService() {
-		if(vehicleService == null){
-			this.vehicleService = VehicleService.getInstance();
-		}
-		return vehicleService;
-	}*/
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
+	public VehicleService getVehicleService() {
+		return vehicleService;
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         try {
-            request.setAttribute("nb_voitures",this.vehicleService.count());
+            request.setAttribute("nb_voitures",this.getVehicleService().count());
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
 	}
-
 }

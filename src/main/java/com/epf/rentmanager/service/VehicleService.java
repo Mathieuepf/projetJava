@@ -13,19 +13,11 @@ import org.springframework.stereotype.Service;
 public class VehicleService {
 
 	private VehicleDao vehicleDao;
-	//public static VehicleService instance;
 
 	@Autowired
 	private VehicleService(VehicleDao vehicleDao) {
 		this.vehicleDao = vehicleDao;
 	}
-	
-	/*public static VehicleService getInstance() {
-		if (instance == null) {
-			instance = new VehicleService();
-		}
-		return instance;
-	}*/
 
 	public VehicleDao getVehicleDao() {
 		return vehicleDao;
