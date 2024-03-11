@@ -2,27 +2,30 @@ package com.epf.rentmanager.service;
 
 import java.util.List;
 import java.util.Objects;
-
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.dao.VehicleDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VehicleService {
 
 	private VehicleDao vehicleDao;
-	public static VehicleService instance;
-	
-	private VehicleService() {
-		this.vehicleDao = VehicleDao.getInstance();
+	//public static VehicleService instance;
+
+	@Autowired
+	private VehicleService(VehicleDao vehicleDao) {
+		this.vehicleDao = vehicleDao;
 	}
 	
-	public static VehicleService getInstance() {
+	/*public static VehicleService getInstance() {
 		if (instance == null) {
 			instance = new VehicleService();
 		}
 		return instance;
-	}
+	}*/
 
 	public VehicleDao getVehicleDao() {
 		return vehicleDao;

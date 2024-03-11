@@ -7,18 +7,21 @@ import com.epf.rentmanager.utils.IOUtils;
 public class Main {
 
     public static void main(String[] args) {
-        ClientCli clientCli = ClientCli.getInstance();
+        /*ClientCli clientCli = ClientCli.getInstance();
         VehicleCli vehicleCli = VehicleCli.getInstance();
-        ReservationCli reservationCli = ReservationCli.getInstance();
-        try {
+        ReservationCli reservationCli = ReservationCli.getInstance();*/
+        /*try {
             //long n = clientCli.create(); // Fonctionnel
             //clientCli.findAll(); // Fonctionnel
             // long nv = vehicleCli.create(); // Fonctionnel
             // vehicleCli.findAll(); // Fonctionnel
             // reservationCli.create();
-            reservationCli.findall();
+            // reservationCli.findall();
         } catch (CliException e) {
             throw new RuntimeException(e);
         }
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+        ClientService clientService = context.getBean(ClientService.class);
+        VehicleService vehicleService = context.getBean(VehicleService.class);*/
     }
 }

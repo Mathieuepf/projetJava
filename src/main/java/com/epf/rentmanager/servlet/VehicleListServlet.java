@@ -3,6 +3,8 @@ package com.epf.rentmanager.servlet;
 import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +17,22 @@ import java.util.List;
 @WebServlet("/cars")
 public class VehicleListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private VehicleService vehicleService;
-    public VehicleService getVehicleService() {
+    @Autowired
+    VehicleService vehicleService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
+    /*public VehicleService getVehicleService() {
         if(vehicleService == null){
             this.vehicleService = VehicleService.getInstance();
         }
+        return vehicleService;
+    }*/
+
+    public VehicleService getVehicleService() {
         return vehicleService;
     }
 
