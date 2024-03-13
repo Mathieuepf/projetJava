@@ -59,4 +59,12 @@ public class ClientService {
 			throw new ServiceException();
 		}
 	}
+
+	public int count() throws ServiceException {
+		try {
+			return this.getClientDao().count();
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
+	}
 }
