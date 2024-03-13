@@ -15,6 +15,7 @@ com\epf\rentmanager\ui\cli\VehicleCli.class
 com\epf\rentmanager\Exception\ServiceException.class
 com\epf\rentmanager\ui\cli\ClientCli.class
 com\epf\rentmanager\Exception\CliException.class
+com\epf\rentmanager\servlet\ClientDetailsServlet.class
 com\epf\rentmanager\service\ReservationService.class
 com\epf\rentmanager\utils\IOUtils.class
 com\epf\rentmanager\persistence\FillDatabase.class
