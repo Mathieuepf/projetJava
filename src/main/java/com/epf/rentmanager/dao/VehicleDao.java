@@ -121,11 +121,8 @@ public class VehicleDao {
 			PreparedStatement ps = connection.prepareStatement(COUNT_VEHICLES_QUERY);
 			ps.execute();
 			ResultSet resultSet = ps.getResultSet();
-			System.out.println("rentré dans le DAO");
 			resultSet.next();
 			int count = resultSet.getInt(1);
-
-			System.out.println("DAO le compte est de "+count);
 
 			resultSet.close();
 			ps.close();

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/users/create")
 public class ClientCreateServlet extends HttpServlet {
@@ -38,8 +40,9 @@ public class ClientCreateServlet extends HttpServlet {
         String nom = req.getParameter("last_name");
         String prenom = req.getParameter("first_name");
         String email = req.getParameter("email");
+        LocalDate naissance = LocalDate.parse(req.getParameter("birth_date"));
         try {
-            getClientService().create(new Client(nom,prenom,email));
+            getClientService().create(new Client(nom,prenom,email,naissance));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }

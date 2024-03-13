@@ -30,7 +30,8 @@ public class ClientService {
 			if ((!(client.getNom() == null)) && !client.getNom().isEmpty()) {
 				return this.getClientDao().create(client);
 			} else throw new ServiceException();
-		}catch (Exception e) {
+		}catch (DaoException e) {
+			System.out.println("ExceptionDAO");
 			throw new ServiceException();
 		}
 	}
@@ -38,7 +39,7 @@ public class ClientService {
 	public long delete(Client client) throws ServiceException {
 		try {
 			return this.getClientDao().delete(client);
-		}catch (Exception e){
+		}catch (DaoException e){
 			throw new ServiceException();
 		}
 	}
