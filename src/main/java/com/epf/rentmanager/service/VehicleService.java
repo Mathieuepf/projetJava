@@ -1,7 +1,6 @@
 package com.epf.rentmanager.service;
 
 import java.util.List;
-import java.util.Objects;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.model.Vehicule;

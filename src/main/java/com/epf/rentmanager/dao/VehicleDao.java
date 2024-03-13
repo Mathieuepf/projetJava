@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class VehicleDao {
-	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, nb_places) VALUES(?, ?);";
+	private static final String CREATE_VEHICLE_QUERY = "INSERT INTO Vehicle(constructeur, modele, nb_places) VALUES(?, ?, ?);";
 	private static final String DELETE_VEHICLE_QUERY = "DELETE FROM Vehicle WHERE id=?;";
-	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle WHERE id=?;";
-	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
+	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
+	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
 	private static final String COUNT_VEHICLES_QUERY = "SELECT COUNT(*) FROM Vehicle;";
 	
 	public long create(Vehicule vehicule) throws DaoException {
@@ -27,7 +27,8 @@ public class VehicleDao {
 			PreparedStatement ps = connection.prepareStatement(CREATE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, vehicule.getConstructeur());
-			ps.setShort(2, vehicule.getNb_places());
+			ps.setString(2, vehicule.getModele());
+			ps.setShort(3, vehicule.getNb_places());
 
 			ps.execute();
 			ResultSet results = ps.getGeneratedKeys();
@@ -81,7 +82,7 @@ public class VehicleDao {
 			connection.close();
 
 
-			return new Vehicule(id,resultSet.getString(2),resultSet.getShort(3));
+			return new Vehicule(id,resultSet.getString(2),resultSet.getString(3),resultSet.getShort(4));
 
 		} catch (SQLException e){
 			throw new DaoException();
@@ -101,7 +102,7 @@ public class VehicleDao {
 			ArrayList<Vehicule> vehiculeList = new ArrayList<Vehicule>();
 
 			while (resultSet.next()) {
-				vehiculeList.add(new Vehicule(resultSet.getLong(1), resultSet.getString(2), resultSet.getShort(3)));
+				vehiculeList.add(new Vehicule(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getShort(4)));
 			}
 
 			resultSet.close();
