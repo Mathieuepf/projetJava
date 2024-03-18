@@ -2,6 +2,7 @@ C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\model\Vehicule.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\VehicleListServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\Exception\CliException.java
+C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\ClientDeleteServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\model\Client.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\Exception\DaoException.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\service\ReservationService.java
@@ -19,6 +20,7 @@ C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\configuration\AppConfiguration.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\service\ClientService.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.java
+C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\ClientUpdateServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\persistence\ConnectionManager.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\HomeServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\dao\ReservationDao.java

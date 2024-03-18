@@ -68,6 +68,10 @@ public class Client {
     }
 
     public Client(){}
+
+    public Client(long id) {
+        this.setId(id);
+    }
     @Override
     public String toString() {
         return "Client : " +

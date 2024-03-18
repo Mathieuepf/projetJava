@@ -46,5 +46,6 @@ public class ClientCreateServlet extends HttpServlet {
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
+
     }
 }
