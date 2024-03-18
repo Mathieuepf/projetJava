@@ -62,6 +62,10 @@ public class Vehicule {
         this.setNb_places(nb_places);
     }
 
+    public Vehicule(long id) {
+        this.setId(id);
+    }
+
     @Override
     public String toString() {
         return "Vehicule = " +

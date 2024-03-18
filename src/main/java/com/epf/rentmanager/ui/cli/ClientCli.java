@@ -42,7 +42,6 @@ public class ClientCli {
         try {
             List<Client> clients = new ArrayList<Client>();
             clients = this.getClientService().findAll();
-            //System.out.println("Size du clients " + clients.size());
             for (Client client : clients) {
                 IOUtils.print(client.toString());
             }

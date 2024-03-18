@@ -36,7 +36,6 @@ public class VehicleCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp").forward(request, response);
         String marque = request.getParameter("manufacturer");
         String modele = request.getParameter("modele");
         short nb_places = Short.parseShort(request.getParameter("seats"));
@@ -45,5 +44,6 @@ public class VehicleCreateServlet extends HttpServlet {
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
+        response.sendRedirect(request.getContextPath() + "/cars");
     }
 }

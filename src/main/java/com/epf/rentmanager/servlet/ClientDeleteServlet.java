@@ -34,8 +34,6 @@ public class ClientDeleteServlet extends HttpServlet {
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        System.out.println("Context path : "+req.getContextPath());
-        System.out.println("Query string : "+req.getQueryString());
         resp.sendRedirect(req.getContextPath() + "/users");
     }
 }
