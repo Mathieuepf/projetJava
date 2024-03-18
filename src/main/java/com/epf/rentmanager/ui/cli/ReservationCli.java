@@ -2,9 +2,14 @@ package com.epf.rentmanager.ui.cli;
 
 import com.epf.rentmanager.Exception.CliException;
 import com.epf.rentmanager.Exception.ServiceException;
+import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.model.Reservation;
+import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.utils.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,14 +17,9 @@ import java.util.List;
 
 public class ReservationCli {
     private ReservationService reservationService;
-    public static ReservationCli instance;
-
-    private ReservationCli() { this.reservationService = ReservationService.getInstance(); }
-
-    public static ReservationCli getInstance() {
-        if(instance == null)
-            instance = new ReservationCli();
-        return instance;
+    private ReservationCli() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
+        this.reservationService = context.getBean(ReservationService.class);
     }
     public ReservationService getReservationService() {
         return reservationService;

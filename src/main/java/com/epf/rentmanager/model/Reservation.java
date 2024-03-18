@@ -7,6 +7,8 @@ public class Reservation {
     private LocalDate debut, fin;
     private long client_id;
     private long vehicule_id;
+    private Vehicule vehicule;
+    private Client client;
 
     public long getId() {
         return id;
@@ -48,6 +50,22 @@ public class Reservation {
         this.vehicule_id = vehicule_id;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
     public Reservation (long id, long client_id, long vehicule_id, LocalDate debut, LocalDate fin) {
         this.setId(id);
         this.setVehicule_id(vehicule_id);
@@ -59,6 +77,25 @@ public class Reservation {
     public Reservation (long client_id, long vehicule_id, LocalDate debut, LocalDate fin) {
         this.setClient_id(client_id);
         this.setVehicule_id(vehicule_id);
+        this.setDebut(debut);
+        this.setFin(fin);
+    }
+
+    public Reservation (Client client, Vehicule vehicule, LocalDate debut, LocalDate fin) {
+        this.setClient(client);
+        this.setVehicule(vehicule);
+        this.setClient_id(client.getId());
+        this.setVehicule_id(vehicule.getId());
+        this.setDebut(debut);
+        this.setFin(fin);
+    }
+
+    public Reservation (long id ,Client client, Vehicule vehicule, LocalDate debut, LocalDate fin) {
+        this.setId(id);
+        this.setClient(client);
+        this.setVehicule(vehicule);
+        this.setClient_id(client.getId());
+        this.setVehicule_id(vehicule.getId());
         this.setDebut(debut);
         this.setFin(fin);
     }

@@ -1,28 +1,38 @@
 package com.epf.rentmanager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
+import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.model.Reservation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ReservationService {
     private ReservationDao reservationDao;
-    public static ReservationService instance;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private VehicleService vehicleService;
 
-    private ReservationService() { this.reservationDao = ReservationDao.getInstance(); }
-
-    public static ReservationService getInstance() {
-        if (instance == null) {
-            instance = new ReservationService();
-        }
-        return instance;
+    @Autowired
+    private ReservationService(ReservationDao reservationDao) {
+        this.reservationDao = reservationDao;
     }
 
     public ReservationDao getReservationDao() {
         return reservationDao;
+    }
+    public ClientService getClientService() {
+        return clientService;
+    }
+    public VehicleService getVehicleService() {
+        return vehicleService;
     }
 
     public long create(Reservation reservation) throws ServiceException {
@@ -60,7 +70,12 @@ public class ReservationService {
 
     public List<Reservation> findAll() throws ServiceException {
         try {
-            return this.getReservationDao().findAll();
+            List<Reservation> reservations = this.getReservationDao().findAll();
+            for(Reservation reservation : reservations){
+                reservation.setClient(getClientService().findById(reservation.getClient_id()));
+                reservation.setVehicule(getVehicleService().findById(reservation.getVehicule_id()));
+            }
+            return reservations;
         } catch (DaoException e) {
             throw new ServiceException();
         }

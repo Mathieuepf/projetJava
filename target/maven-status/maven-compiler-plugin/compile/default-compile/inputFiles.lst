@@ -17,9 +17,11 @@ C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\ClientListServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\ui\cli\ClientCli.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\model\Reservation.java
+C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\VehicleDeleteServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\configuration\AppConfiguration.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\service\ClientService.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.java
+C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\ReservationListServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\ClientUpdateServlet.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\persistence\ConnectionManager.java
 C:\Users\ROUBAUD Mathieu\Documents\EPF\4A\langage java\rentmanager\src\main\java\com\epf\rentmanager\servlet\HomeServlet.java

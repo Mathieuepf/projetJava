@@ -37,11 +37,11 @@
                                 <tr>
 
                                 <c:forEach items="${clients}" var="client">
-                                    <td>${client.id}</td>
-                                    <td>${client.nom}</td>
-                                    <td>${client.prenom}</td>
-                                    <td>${client.email}</td>
-                                    <td>${client.naissance}</td>
+                                    <td>${client.getId()}</td>
+                                    <td>${client.getNom()}</td>
+                                    <td>${client.getPrenom()}</td>
+                                    <td>${client.getEmail()}</td>
+                                    <td>${client.getNaissance()}</td>
                                     <td>
                                         <a class="btn btn-primary" href="${pageContext.request.contextPath}/users/details?id=${client.id}">
                                             <i class="fa fa-play"></i>
