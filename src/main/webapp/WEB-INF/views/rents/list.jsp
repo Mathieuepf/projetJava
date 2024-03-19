@@ -36,7 +36,7 @@
                                 </tr>
                                     <c:forEach items="${reservations}" var="reservation">
                                         <tr>
-                                            <td>${reservation.getId}</td>
+                                            <td>${reservation.getId()}</td>
                                             <td>${reservation.getVehicule().getConstructeur()} ${reservation.getVehicule().getModele()}</td>
                                             <td>${reservation.getClient().getPrenom()} ${reservation.getClient().getNom()}</td>
                                             <td>${reservation.getDebut()}</td>

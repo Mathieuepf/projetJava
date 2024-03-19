@@ -49,7 +49,7 @@ public class ClientDao {
 			return createId;
 
 		}catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class ClientDao {
 			return client.getId();
 
         } catch (SQLException e) {
-            throw new DaoException();
+            throw new DaoException(e);
         }
 	}
 
@@ -82,7 +82,8 @@ public class ClientDao {
 
 			ps.execute();
 
-			ResultSet resultSet = ps.getGeneratedKeys();
+			ResultSet resultSet = ps.getResultSet();
+			resultSet.next();
 
 			String nom = resultSet.getString(1);
 			String prenom = resultSet.getString(2);
@@ -95,7 +96,7 @@ public class ClientDao {
 
 			return new Client(id,nom,prenom,mail,naissance);
 		} catch (SQLException e){
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 
@@ -124,7 +125,7 @@ public class ClientDao {
 			return clientList;
 
 		} catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 
@@ -142,7 +143,7 @@ public class ClientDao {
 			connection.close();
 			return count;
 		} catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 }

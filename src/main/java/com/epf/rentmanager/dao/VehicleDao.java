@@ -61,7 +61,7 @@ public class VehicleDao {
 			return vehicule.getId();
 
 		}catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 
@@ -76,16 +76,20 @@ public class VehicleDao {
 			ps.execute();
 
 			ResultSet resultSet = ps.getResultSet();
+			resultSet.next();
+			String constructeur = resultSet.getString(2);
+			String modele = resultSet.getString(3);
+			short nb_places = resultSet.getShort(4);
 
 			resultSet.close();
 			ps.close();
 			connection.close();
 
 
-			return new Vehicule(id,resultSet.getString(2),resultSet.getString(3),resultSet.getShort(4));
+			return new Vehicule(id,constructeur, modele, nb_places);
 
 		} catch (SQLException e){
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 
 	}
@@ -112,7 +116,7 @@ public class VehicleDao {
 			return vehiculeList;
 
 		} catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 
@@ -130,7 +134,7 @@ public class VehicleDao {
 			connection.close();
 			return count;
 		} catch (SQLException e) {
-			throw new DaoException();
+			throw new DaoException(e);
 		}
 	}
 }

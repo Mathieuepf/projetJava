@@ -31,8 +31,7 @@ public class ClientService {
 				return this.getClientDao().create(client);
 			} else throw new ServiceException();
 		}catch (DaoException e) {
-			System.out.println("ExceptionDAO");
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -40,7 +39,7 @@ public class ClientService {
 		try {
 			return this.getClientDao().delete(client);
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -48,7 +47,7 @@ public class ClientService {
 		try {
 			return this.getClientDao().findById(id);
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -56,7 +55,7 @@ public class ClientService {
 		try{
 			return this.getClientDao().findAll();
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -64,7 +63,7 @@ public class ClientService {
 		try {
 			return this.getClientDao().count();
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 }
