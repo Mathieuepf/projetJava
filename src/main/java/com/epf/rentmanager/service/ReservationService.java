@@ -72,7 +72,6 @@ public class ReservationService {
         try {
             List<Reservation> reservations = this.getReservationDao().findAll();
             for(Reservation reservation : reservations){
-                System.out.println("ReseService Client id : "+reservation.getClient_id());
                 reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
                 reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));
             }

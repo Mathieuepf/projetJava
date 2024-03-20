@@ -35,9 +35,6 @@ public class ReservationListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             List<Reservation> reservations = getReservationService().findAll();
-            System.out.println("on a fait la list");
-            for(Reservation reservation : reservations)
-                System.out.println("Liste des réservations\n" + reservation);
             req.setAttribute("reservations",reservations);
         } catch (ServiceException e) {
             throw new ServletException(e);

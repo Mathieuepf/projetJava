@@ -65,13 +65,8 @@ public class ReservationCreateServlet extends HttpServlet {
         long vehicle_id = Long.parseLong(req.getParameter("car"));
         LocalDate debut = LocalDate.parse(req.getParameter("begin"));
         LocalDate fin = LocalDate.parse(req.getParameter("end"));
-        System.out.println("client id : "+client_id);
-        System.out.println("vehicle id : "+vehicle_id);
-        System.out.println("debut : "+debut);
-        System.out.println("fin : "+fin);
         try {
             getReservationService().create(new Reservation(client_id,vehicle_id,debut,fin));
-            System.out.println("Reservation créée");
         } catch (ServiceException e) {
             throw new ServletException(e);
         }

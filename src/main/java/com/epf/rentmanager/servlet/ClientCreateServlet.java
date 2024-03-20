@@ -41,7 +41,7 @@ public class ClientCreateServlet extends HttpServlet {
         String email = req.getParameter("email");
         LocalDate naissance = LocalDate.parse(req.getParameter("birth_date"));
         try {
-            getClientService().create(new Client(nom,prenom,email,naissance));
+            this.getClientService().create(new Client(nom,prenom,email,naissance));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
