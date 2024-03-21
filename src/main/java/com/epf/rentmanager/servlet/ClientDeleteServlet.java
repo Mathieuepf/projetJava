@@ -30,7 +30,7 @@ public class ClientDeleteServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getClientService().delete(new Client(Integer.parseInt(req.getQueryString().substring(3))));
+            getClientService().delete(new Client(Long.parseLong(req.getQueryString().substring(3))));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }

@@ -1,10 +1,8 @@
 package com.epf.rentmanager.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
-import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +52,12 @@ public class ReservationService {
 
     public List<Reservation> findResaByVehicletId(long vehicleId) throws ServiceException {
         try {
-            return this.getReservationDao().findResaByVehicleId(vehicleId);
+            List<Reservation> reservations = this.getReservationDao().findResaByClientId(vehicleId);
+            for(Reservation reservation : reservations){
+                reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
+                reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));
+            }
+            return reservations;
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -62,7 +65,18 @@ public class ReservationService {
 
     public List<Reservation> findResaByClientId(long clientId) throws ServiceException {
         try {
-            return this.getReservationDao().findResaByClientId(clientId);
+            List<Reservation> reservations = this.getReservationDao().findResaByClientId(clientId);
+            for(Reservation reservation : reservations) {
+                System.out.println("résa id : " + reservation.getId() + "véhicule id " + reservation.getVehicule_id());
+                reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
+                reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));
+                System.out.println("résa id : " + reservation.getId() + " véhicule : " + this.getVehicleService().findById(reservation.getVehicule_id()));
+                System.out.println("résa id : " + reservation.getId() + " client : " + this.getClientService().findById(reservation.getVehicule_id()));
+            }
+
+            System.out.println("après boucle : "+reservations.getFirst().getVehicule());
+
+            return reservations;
         } catch (DaoException e) {
             throw new ServiceException();
         }

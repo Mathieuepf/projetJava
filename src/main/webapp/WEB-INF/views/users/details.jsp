@@ -20,7 +20,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <h3 class="profile-username text-center">John Doe (john.doe@epf.fr)</h3>
+                            <h3 class="profile-username text-center">${client.getPrenom()} ${client.getNom()} (${client.getEmail()})</h3>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -52,18 +52,14 @@
                                             <th>Date de debut</th>
                                             <th>Date de fin</th>
                                         </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Renault Megane</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7.</td>
-                                            <td>Peugeot 207</td>
-                                            <td>10/01/2018</td>
-                                            <td>12/01/2018</td>
-                                        </tr>
+                                        <c:forEach items="${reservations}" var="reservation">
+                                            <tr>
+                                                <td>${reservation.getId()}.</td>
+                                                <td>${reservation.getVehicule().getConstructeur()} ${reservation.getVehicule().getModele()}</td>
+                                                <td>${reservation.getDebut()}</td>
+                                                <td>${reservation.getFin()}</td>
+                                            </tr>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
@@ -78,24 +74,14 @@
                                             <th>Constructeur</th>
                                             <th style=>Nombre de places</th>
                                         </tr>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>Renault</td>
-                                            <td>Clio</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Peugeot</td>
-                                            <td>206</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Volkswagen</td>
-                                            <td>Touran</td>
-                                            <td>7</td>
-                                        </tr>
+                                        <c:forEach items="${vehicules}" var="vehicule">
+                                            <tr>
+                                                <td>${vehicule.getId()}.</td>
+                                                <td>${vehicule.getModele()}</td>
+                                                <td>${vehicule.getConstructeur()}</td>
+                                                <td>${vehicule.getNb_places()}</td>
+                                            </tr>
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>
