@@ -3,6 +3,7 @@ package com.epf.rentmanager.service;
 import java.util.List;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
+import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.dao.VehicleDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,14 @@ public class VehicleService {
 			return this.getVehicleDao().count();
 		} catch (DaoException e) {
 			throw new ServiceException();
+		}
+	}
+
+	public long update(Vehicule vehicule) throws ServiceException {
+		try {
+			return this.getVehicleDao().update(vehicule);
+		} catch (DaoException e) {
+			throw new ServiceException(e);
 		}
 	}
 }

@@ -3,9 +3,7 @@ package com.epf.rentmanager.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import com.epf.rentmanager.model.Client;
-import com.epf.rentmanager.model.Reservation;
 import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.persistence.ConnectionManager;
@@ -18,6 +16,7 @@ public class VehicleDao {
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, modele, nb_places FROM Vehicle;";
 	private static final String COUNT_VEHICLES_QUERY = "SELECT COUNT(*) FROM Vehicle;";
+	private static final String UPDATE_VEHICLE_QUERY = "UPDATE Vehicle SET constructeur=?, modele=?, nb_places=? WHERE id=?;";
 	
 	public long create(Vehicule vehicule) throws DaoException {
 
@@ -134,6 +133,30 @@ public class VehicleDao {
 			connection.close();
 			return count;
 		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+
+	public long update(Vehicule vehicule) throws DaoException {
+		try {
+			Connection connection = ConnectionManager.getConnection();
+
+			PreparedStatement ps = connection.prepareStatement(UPDATE_VEHICLE_QUERY);
+
+
+			ps.setString(1, vehicule.getConstructeur());
+			ps.setString(2, vehicule.getModele());
+			ps.setShort(3, vehicule.getNb_places());
+			ps.setLong(4, vehicule.getId());
+
+			ps.execute();
+
+			ps.close();
+			connection.close();
+
+			return vehicule.getId();
+
+		}catch (SQLException e) {
 			throw new DaoException(e);
 		}
 	}
