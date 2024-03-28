@@ -100,6 +100,10 @@ public class Reservation {
         this.setFin(fin);
     }
 
+    public Reservation(long id) {
+        this.setId(id);
+    }
+
     @Override
     public String toString() {
         return "Reservation = " +

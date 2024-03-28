@@ -67,14 +67,9 @@ public class ReservationService {
         try {
             List<Reservation> reservations = this.getReservationDao().findResaByClientId(clientId);
             for(Reservation reservation : reservations) {
-                System.out.println("résa id : " + reservation.getId() + "véhicule id " + reservation.getVehicule_id());
                 reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
                 reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));
-                System.out.println("résa id : " + reservation.getId() + " véhicule : " + this.getVehicleService().findById(reservation.getVehicule_id()));
-                System.out.println("résa id : " + reservation.getId() + " client : " + this.getClientService().findById(reservation.getVehicule_id()));
             }
-
-            System.out.println("après boucle : "+reservations.getFirst().getVehicule());
 
             return reservations;
         } catch (DaoException e) {
@@ -95,9 +90,28 @@ public class ReservationService {
         }
     }
 
+    public Reservation findById(long id) throws ServiceException {
+        try {
+            Reservation reservation = this.getReservationDao().findById(id);
+            reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
+            reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));
+            return reservation;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public int count() throws ServiceException {
         try {
             return this.getReservationDao().count();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public long update(Reservation reservation) throws ServiceException {
+        try {
+            return this.getReservationDao().update(reservation);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

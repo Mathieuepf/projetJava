@@ -1,5 +1,7 @@
 package com.epf.rentmanager.model;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import java.time.LocalDate;
 
 public class Client {
@@ -81,4 +83,9 @@ public class Client {
                 ", email = '" + email + '\'' +
                 ", naissance = " + naissance;
     }
+
+    /*@Override
+    public boolean equals(Client client1, Client client2) {
+        return(client1.getId() == client2.getId());
+    }*/
 }
