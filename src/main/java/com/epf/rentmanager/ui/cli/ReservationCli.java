@@ -51,7 +51,7 @@ public class ReservationCli {
         try {
             long vehicle_id = IOUtils.readLong("Indiquez l'id du véhicule dont vous souhaitez les réservations");
             List<Reservation> reservations = new ArrayList<Reservation>();
-            reservations = this.getReservationService().findResaByVehicletId(vehicle_id);
+            reservations = this.getReservationService().findResaByVehicleId(vehicle_id);
             for (Reservation reservation : reservations){
                 IOUtils.print(reservation.toString());
             }
@@ -63,7 +63,7 @@ public class ReservationCli {
         try {
             long client_id = IOUtils.readLong("Indiquez l'id du client dont vous souhaitez les réservations");
             List<Reservation> reservations = new ArrayList<Reservation>();
-            reservations = this.getReservationService().findResaByVehicletId(client_id);
+            reservations = this.getReservationService().findResaByVehicleId(client_id);
             for (Reservation reservation : reservations){
                 IOUtils.print(reservation.toString());
             }

@@ -50,9 +50,9 @@ public class ReservationService {
         }
     }
 
-    public List<Reservation> findResaByVehicletId(long vehicleId) throws ServiceException {
+    public List<Reservation> findResaByVehicleId(long vehicleId) throws ServiceException {
         try {
-            List<Reservation> reservations = this.getReservationDao().findResaByClientId(vehicleId);
+            List<Reservation> reservations = this.getReservationDao().findResaByVehicleId(vehicleId);
             for(Reservation reservation : reservations){
                 reservation.setClient(this.getClientService().findById(reservation.getClient_id()));
                 reservation.setVehicule(this.getVehicleService().findById(reservation.getVehicule_id()));

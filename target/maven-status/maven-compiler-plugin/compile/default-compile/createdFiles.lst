@@ -1,3 +1,4 @@
+com\epf\rentmanager\servlet\VehicleDetailsServlet.class
 com\epf\rentmanager\model\Reservation.class
 com\epf\rentmanager\Exception\DaoException.class
 com\epf\rentmanager\servlet\ClientCreateServlet.class
