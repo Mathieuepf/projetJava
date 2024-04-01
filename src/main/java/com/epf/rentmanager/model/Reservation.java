@@ -1,6 +1,7 @@
 package com.epf.rentmanager.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Reservation {
     private long id;
@@ -112,5 +113,18 @@ public class Reservation {
                 ", vehicule id =" + vehicule_id +
                 ", debut=" + debut +
                 ", fin=" + fin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

@@ -3,6 +3,7 @@ package com.epf.rentmanager.model;
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Client {
     private long id;
@@ -84,8 +85,16 @@ public class Client {
                 ", naissance = " + naissance;
     }
 
-    /*@Override
-    public boolean equals(Client client1, Client client2) {
-        return(client1.getId() == client2.getId());
-    }*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return getId() == client.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

@@ -7,6 +7,7 @@ import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
+import com.sun.tools.javac.util.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/users/details")
 public class ClientDetailsServlet extends HttpServlet {
@@ -50,16 +52,26 @@ public class ClientDetailsServlet extends HttpServlet {
         try {
             Client client = this.getClientService().findById(Long.parseLong(req.getQueryString().substring(3)));
             req.setAttribute("client",client);
-            List<Reservation> reservations = this.getReservationService().findResaByClientId(client.getId());
-            req.setAttribute("reservations",reservations);
-            List<Vehicule> vehicules = new ArrayList<Vehicule>();
-            for(Reservation reservation : reservations) {
-                //TODO : if(reservation.getVehicule() not in vehicules)
-                vehicules.add(reservation.getVehicule());
-                System.out.println("Servlet : " + reservation.getVehicule());
+            try {
+                List<Reservation> reservations = this.getReservationService().findResaByClientId(client.getId());
+                req.setAttribute("reservations",reservations);
+                List<Vehicule> vehicules = new ArrayList<Vehicule>();
+                List<Long> id_vehicles = new ArrayList<Long>();
+                for (Reservation reservation : reservations){
+                    if (! id_vehicles.contains(reservation.getVehicule().getId())) {
+                        id_vehicles.add(reservation.getVehicule().getId());
+                        vehicules.add(reservation.getVehicule());
+                    }
+                }
+                //reservations.forEach(r -> vehicules.add(r.getVehicule()));
+
+                req.setAttribute("vehicules",vehicules);
+                req.setAttribute("count_reservations",reservations.size());
+                req.setAttribute("count_vehicles",vehicules.size());
+            } catch (ServiceException e) {
+                req.setAttribute("count_reservations",0);
+                req.setAttribute("count_vehicles",0);
             }
-            System.out.println("premier véhicule : " + vehicules.getFirst());
-            req.setAttribute("vehicules",vehicules);
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
