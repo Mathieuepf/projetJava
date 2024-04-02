@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @WebServlet("/users/create")
 public class ClientCreateServlet extends HttpServlet {
@@ -41,10 +40,13 @@ public class ClientCreateServlet extends HttpServlet {
         String email = req.getParameter("email");
         LocalDate naissance = LocalDate.parse(req.getParameter("birth_date"));
         try {
-            this.getClientService().create(new Client(nom,prenom,email,naissance));
+            long returnId = this.getClientService().create(new Client(nom,prenom,email,naissance));
+            if(returnId > 0)
+                resp.sendRedirect(req.getContextPath() + "/users");
+            else
+                resp.sendRedirect(req.getContextPath() + "/users/create");
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/users");
     }
 }

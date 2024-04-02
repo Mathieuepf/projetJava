@@ -1,5 +1,7 @@
 package com.epf.rentmanager.service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,9 +29,12 @@ public class ClientService {
 
 	public long create(Client client) throws ServiceException {
 		try {
-			if ((!(client.getNom() == null)) && !client.getNom().isEmpty()) {
+			Period agePeriod = Period.between(client.getNaissance(),LocalDate.now());
+			int age = agePeriod.getYears();
+			if (client.getPrenom().length() > 2 && client.getPrenom().length() > 2
+					&& age >= 18 && !this.findAll().contains(client)) {
 				return this.getClientDao().create(client);
-			} else throw new ServiceException();
+			} else return -1;
 		}catch (DaoException e) {
 			throw new ServiceException(e);
 		}
@@ -69,7 +74,12 @@ public class ClientService {
 
 	public long update(Client client) throws ServiceException {
         try {
-            return this.getClientDao().update(client);
+			Period agePeriod = Period.between(client.getNaissance(),LocalDate.now());
+			int age = agePeriod.getYears();
+			if (client.getPrenom().length() > 2 && client.getPrenom().length() > 2
+					&& age >= 18) {
+				return this.getClientDao().update(client);
+			} else return -1;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

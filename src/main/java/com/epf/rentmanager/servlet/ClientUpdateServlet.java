@@ -50,10 +50,14 @@ public class ClientUpdateServlet extends HttpServlet {
         String email = req.getParameter("email");
         LocalDate naissance = LocalDate.parse(req.getParameter("birth_date"));
         try {
-            this.getClientService().update(new Client(Long.parseLong(req.getQueryString().substring(3)),nom,prenom,email,naissance));
+            long returnId = this.getClientService().update(new Client(Long.parseLong(req.getQueryString().substring(3)),nom,prenom,email,naissance));
+            if (returnId > 0)
+                resp.sendRedirect(req.getContextPath() + "/users");
+            else
+                resp.sendRedirect(req.getContextPath() + "/users/update?id=" + req.getQueryString().substring(3));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/users");
+
     }
 }

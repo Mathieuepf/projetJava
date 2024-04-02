@@ -50,11 +50,9 @@ public class VehicleDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Vehicule vehicule = this.getVehicleService().findById(Long.parseLong(req.getQueryString().substring(3)));
-            System.out.println("id vehicule : "+vehicule.getId());
             req.setAttribute("vehicule", vehicule);
             try {
                 List<Reservation> reservations = this.getReservationService().findResaByVehicleId(vehicule.getId());
-                System.out.println("reservations : "+reservations);
                 req.setAttribute("reservations", reservations);
                 List<Client> clients = new ArrayList<Client>();
                 for (Reservation reservation : reservations) {
@@ -66,7 +64,6 @@ public class VehicleDetailsServlet extends HttpServlet {
                 req.setAttribute("count_reservations", reservations.size());
                 req.setAttribute("count_clients", clients.size());
             } catch (ServiceException e) {
-                System.out.println("On est dans le catch");
                 req.setAttribute("count_reservations", 0);
                 req.setAttribute("count_vehicles", 0);
             }

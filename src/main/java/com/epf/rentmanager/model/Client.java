@@ -43,7 +43,7 @@ public class Client {
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
     }
 
     public void setPrenom(String prenom) {
@@ -90,7 +90,7 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return getId() == client.getId();
+        return (getId() == client.getId() || getEmail().equals(client.getEmail()));
     }
 
     @Override
