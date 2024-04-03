@@ -47,10 +47,13 @@ public class VehicleUpdateServlet extends HttpServlet {
         String modele = req.getParameter("modele");
         short nb_places = Short.parseShort(req.getParameter("nbPlaces"));
         try {
-            this.getVehicleService().update(new Vehicule(Long.parseLong(req.getQueryString().substring(3)), constructeur, modele, nb_places));
+            long returnId = this.getVehicleService().update(new Vehicule(Long.parseLong(req.getQueryString().substring(3)), constructeur, modele, nb_places));
+            if (returnId > 0)
+                resp.sendRedirect(req.getContextPath() + "/cars");
+            else
+                resp.sendRedirect(req.getContextPath() + "/cars/update?id=" + req.getQueryString().substring(3));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/cars");
     }
 }

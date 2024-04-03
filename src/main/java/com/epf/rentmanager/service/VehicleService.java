@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class VehicleService {
 
-	private VehicleDao vehicleDao;
+	private final VehicleDao vehicleDao;
 	@Autowired
 	private ReservationService reservationService;
 
@@ -32,11 +32,12 @@ public class VehicleService {
 
 	public long create(Vehicule vehicle) throws ServiceException {
 		try {
-			if((!(vehicle.getConstructeur() == null)) && !vehicle.getConstructeur().isEmpty())
+			if(!vehicle.getConstructeur().isEmpty() && !vehicle.getModele().isEmpty()
+					&& vehicle.getNb_places() >= 2 && vehicle.getNb_places() <= 9)
 				return this.getVehicleDao().create(vehicle);
-			else throw new ServiceException();
+			else return -1;
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -52,7 +53,7 @@ public class VehicleService {
             });
 			return this.getVehicleDao().delete(vehicule);
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -60,7 +61,7 @@ public class VehicleService {
 		try {
 			return this.getVehicleDao().findById(id);
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -68,7 +69,7 @@ public class VehicleService {
 		try{
 			return this.getVehicleDao().findAll();
 		}catch (DaoException e){
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
@@ -76,13 +77,16 @@ public class VehicleService {
 		try {
 			return this.getVehicleDao().count();
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 
-	public long update(Vehicule vehicule) throws ServiceException {
+	public long update(Vehicule vehicle) throws ServiceException {
 		try {
-			return this.getVehicleDao().update(vehicule);
+			if(!vehicle.getConstructeur().isEmpty() && !vehicle.getModele().isEmpty()
+					&& vehicle.getNb_places() >= 2 && vehicle.getNb_places() <= 9)
+				return this.getVehicleDao().update(vehicle);
+			else return -1;
 		} catch (DaoException e) {
 			throw new ServiceException(e);
 		}

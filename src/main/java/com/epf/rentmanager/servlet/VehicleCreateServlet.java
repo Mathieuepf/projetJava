@@ -40,10 +40,13 @@ public class VehicleCreateServlet extends HttpServlet {
         String modele = request.getParameter("modele");
         short nb_places = Short.parseShort(request.getParameter("seats"));
         try {
-            getVehicleService().create(new Vehicule(marque,modele,nb_places));
+            long returnId = this.getVehicleService().create(new Vehicule(marque,modele,nb_places));
+            if (returnId > 0)
+                response.sendRedirect(request.getContextPath() + "/cars");
+            else
+                response.sendRedirect(request.getContextPath() + "/cars/create");
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        response.sendRedirect(request.getContextPath() + "/cars");
     }
 }
