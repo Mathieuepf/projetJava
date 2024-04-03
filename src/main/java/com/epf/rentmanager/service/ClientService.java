@@ -10,6 +10,7 @@ import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
 import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 public class ClientService {
 
 	private ClientDao clientDao;
+	@Autowired
+	private ReservationService reservationService;
 
 	@Autowired
 	private ClientService(ClientDao clientDao) {
@@ -25,6 +28,10 @@ public class ClientService {
 
 	public ClientDao getClientDao() {
 		return clientDao;
+	}
+
+	public ReservationService getReservationService() {
+		return reservationService;
 	}
 
 	public long create(Client client) throws ServiceException {
@@ -42,6 +49,14 @@ public class ClientService {
 
 	public long delete(Client client) throws ServiceException {
 		try {
+			List<Reservation> reservations = this.getReservationService().findResaByClientId(client.getId());
+			reservations.forEach(reservation -> {
+                try {
+                    this.getReservationService().delete(reservation);
+                } catch (ServiceException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 			return this.getClientDao().delete(client);
 		}catch (DaoException e){
 			throw new ServiceException(e);
