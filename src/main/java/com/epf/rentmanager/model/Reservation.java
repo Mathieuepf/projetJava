@@ -1,6 +1,7 @@
 package com.epf.rentmanager.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class Reservation {
@@ -10,6 +11,7 @@ public class Reservation {
     private long vehicule_id;
     private Vehicule vehicule;
     private Client client;
+    private int dureeReservation;
 
     public long getId() {
         return id;
@@ -67,12 +69,21 @@ public class Reservation {
         return vehicule;
     }
 
+    public int getDureeReservation() {
+        return dureeReservation;
+    }
+
+    public void setDureeReservation() {
+        this.dureeReservation = Period.between(this.getDebut(),this.getFin()).getDays() + 1;
+    }
+
     public Reservation (long id, long client_id, long vehicule_id, LocalDate debut, LocalDate fin) {
         this.setId(id);
         this.setVehicule_id(vehicule_id);
         this.setClient_id(client_id);
         this.setDebut(debut);
         this.setFin(fin);
+        this.setDureeReservation();
     }
 
     public Reservation (long client_id, long vehicule_id, LocalDate debut, LocalDate fin) {
@@ -80,6 +91,7 @@ public class Reservation {
         this.setVehicule_id(vehicule_id);
         this.setDebut(debut);
         this.setFin(fin);
+        this.setDureeReservation();
     }
 
     public Reservation (Client client, Vehicule vehicule, LocalDate debut, LocalDate fin) {
@@ -89,6 +101,7 @@ public class Reservation {
         this.setVehicule_id(vehicule.getId());
         this.setDebut(debut);
         this.setFin(fin);
+        this.setDureeReservation();
     }
 
     public Reservation (long id ,Client client, Vehicule vehicule, LocalDate debut, LocalDate fin) {
@@ -99,6 +112,7 @@ public class Reservation {
         this.setVehicule_id(vehicule.getId());
         this.setDebut(debut);
         this.setFin(fin);
+        this.setDureeReservation();
     }
 
     public Reservation(long id) {
@@ -112,7 +126,8 @@ public class Reservation {
                 ", client id=" + client_id +
                 ", vehicule id =" + vehicule_id +
                 ", debut=" + debut +
-                ", fin=" + fin;
+                ", fin=" + fin +
+                ", dureeReservation=" + dureeReservation;
     }
 
     @Override

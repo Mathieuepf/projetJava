@@ -66,10 +66,13 @@ public class ReservationCreateServlet extends HttpServlet {
         LocalDate debut = LocalDate.parse(req.getParameter("begin"));
         LocalDate fin = LocalDate.parse(req.getParameter("end"));
         try {
-            getReservationService().create(new Reservation(client_id,vehicle_id,debut,fin));
+            long returnInt = getReservationService().create(new Reservation(client_id,vehicle_id,debut,fin));
+            if (returnInt > 0)
+                resp.sendRedirect(req.getContextPath() + "/rents");
+            else
+                resp.sendRedirect(req.getContextPath() + "/rents/create");
         } catch (ServiceException e) {
             throw new ServletException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/rents");
     }
 }
