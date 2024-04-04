@@ -7,7 +7,6 @@ import com.epf.rentmanager.model.Vehicule;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
-import com.sun.tools.javac.util.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/users/details")
 public class ClientDetailsServlet extends HttpServlet {

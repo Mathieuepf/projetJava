@@ -1,7 +1,7 @@
 package com.epf.rentmanager.service;
 
-import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import com.epf.rentmanager.Exception.DaoException;
 import com.epf.rentmanager.Exception.ServiceException;
@@ -10,7 +10,6 @@ import com.epf.rentmanager.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ReservationService {
@@ -131,6 +130,7 @@ public class ReservationService {
             return false;
 
         List<Reservation> reservations = this.findResaByVehicleId(reservation.getVehicule_id());
+        List<Reservation> listResClient = new ArrayList<Reservation>();
         reservations.remove(reservation);
         int nbJoursResaVoitCumule = reservation.getDureeReservation();
         if (!reservations.isEmpty())
@@ -152,14 +152,14 @@ public class ReservationService {
             if (reservation.getDebut().isEqual(r.getDebut()) || reservation.getDebut().isEqual(r.getFin())
                     || reservation.getFin().isEqual(r.getDebut()) || reservation.getFin().isEqual(r.getFin()))
                 return false;
-//            if (!(r.getClient_id() == reservation.getClient_id()))
-//                r = null;
+            if (r.getClient_id() == reservation.getClient_id())
+                listResClient.add(r);
         }
-//        int nbJoursResaClientCumule = this.dureesResaCumulees(reservations,reservation);
-//        if (nbJoursResaClientCumule > 7)
-//            return false;
-
-
+        if (!listResClient.isEmpty()){
+            int nbJoursResaClientCumule = this.dureesResaCumulees(listResClient,reservation);
+            if (nbJoursResaClientCumule > 7)
+                return false;
+        }
         return true;
     }
 
@@ -196,7 +196,4 @@ public class ReservationService {
 
         return dureeCumulee;
     }
-        //suivant
-        //precedent
-        //colle true/false
 }

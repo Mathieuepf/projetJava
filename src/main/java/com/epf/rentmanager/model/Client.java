@@ -1,7 +1,5 @@
 package com.epf.rentmanager.model;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
