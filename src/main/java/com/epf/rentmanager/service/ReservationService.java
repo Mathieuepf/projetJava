@@ -136,7 +136,6 @@ public class ReservationService {
         if (!reservations.isEmpty())
             nbJoursResaVoitCumule = this.dureesResaCumulees(reservations, reservation);
 
-        System.out.println("nbJours resa"+nbJoursResaVoitCumule);
         if (nbJoursResaVoitCumule > 30)
             return false;
 
@@ -166,6 +165,7 @@ public class ReservationService {
     private int dureesResaCumulees(List<Reservation> reservations, Reservation reservation){
         int dureeCumulee = reservation.getDureeReservation();
         Reservation currentReservation = reservation;
+
         boolean havePreduce = true;
         boolean haveNext = true;
         while(havePreduce && dureeCumulee <= 30) {
@@ -175,7 +175,8 @@ public class ReservationService {
                     currentReservation = r;
                     break;
                 }
-                if(reservations.getLast().equals(r))
+
+                if(reservations.get(reservations.size() - 1).equals(r))
                     havePreduce = false;
             }
         }
@@ -189,7 +190,7 @@ public class ReservationService {
                     currentReservation = r;
                     break;
                 }
-                if(reservations.getLast().equals(r))
+                if(reservations.get(reservations.size() - 1).equals(r))
                     haveNext = false;
             }
         }
